@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "WAVheader.h"
+#include <math.h>
+#include <stdio.h>
 
 #define BLOCK_SIZE 16
 #define MAX_NUM_CHANNEL 8
@@ -14,7 +16,10 @@
 
 float sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 float tempBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
-
+char mode[1];
+char decibels[50];
+char outputMode[5];
+char* pEnd;
 /**
  *
  * Swaps upper and lower half of audio samples. Mixing an inverted sample on top of
@@ -33,7 +38,7 @@ inverter_data_t data;
 void audio_invert_init(inverter_data_t * data, float degree, float gain)
 {
 	data->degree = degree=0; //0
-	data->gain = gain=-1.0;     //-1
+	data->gain = gain=-1.0;  //-1
 }
 
 void gst_audio_invert_transform(inverter_data_t * data,
@@ -50,28 +55,100 @@ float * input, float * output, unsigned int num_samples)
 }
 
 
-void processing()
+void processing(float amplitude,int x,int y)
 {
 	for(int j=0; j<BLOCK_SIZE; j++){
+		if(x==3 && y==2){
 				//default mode
-				//if(mode=='1'){
-				sampleBuffer[3][j]=tempBuffer[0][j]*INPUT_GAIN *INPUT_MODE1_LS;	//ls
-				sampleBuffer[0][j]=tempBuffer[0][j]*INPUT_GAIN ;	//l
-				sampleBuffer[1][j]=tempBuffer[0][j]*INPUT_GAIN *INPUT_MODE1_C;	//c
-				sampleBuffer[4][j]=tempBuffer[1][j]*INPUT_GAIN * -1;	//rs
-				sampleBuffer[2][j]=tempBuffer[1][j]*INPUT_GAIN;	//r
+				if(*mode=='1'){
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_LS;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude ;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_C;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
 
-				//}
-				/*else{
-				sampleBuffer[3][j]=tempBuffer[0][j]*INPUT_GAIN *INPUT_MODE0_LS;	//ls
-				sampleBuffer[0][j]=tempBuffer[0][j]*INPUT_GAIN;	//l
-				sampleBuffer[1][j]=tempBuffer[0][j]*INPUT_GAIN *INPUT_MODE0_C;	//c
-				sampleBuffer[4][j]=tempBuffer[1][j]*INPUT_GAIN * -1;	//rs
-				sampleBuffer[2][j]=tempBuffer[1][j]*INPUT_GAIN;	//r
-				}*/
-			}
+				}
+				else{
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_LS;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_C;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+				}
+			
 			gst_audio_invert_transform(&data,sampleBuffer[2], sampleBuffer[2], BLOCK_SIZE); //R inv
 			gst_audio_invert_transform(&data,sampleBuffer[0], sampleBuffer[0], BLOCK_SIZE); //L inv
+	}else if(x==2 && y==0){
+				//default mode
+				if(*mode=='1'){
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_LS*0;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_C*0;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1*0;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+
+				}
+				else{
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_LS*0;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_C*0;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1*0;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+				}
+			
+			gst_audio_invert_transform(&data,sampleBuffer[2], sampleBuffer[2], BLOCK_SIZE); //R inv
+			gst_audio_invert_transform(&data,sampleBuffer[0], sampleBuffer[0], BLOCK_SIZE); //L inv
+	}
+
+		else if(x==2 && y==2){
+				//default mode
+				if(*mode=='1'){
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_LS;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_C*0;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+
+				}
+				else{
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_LS;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_C*0;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+				}
+			
+			gst_audio_invert_transform(&data,sampleBuffer[2], sampleBuffer[2], BLOCK_SIZE); //R inv
+			gst_audio_invert_transform(&data,sampleBuffer[0], sampleBuffer[0], BLOCK_SIZE); //L inv
+	}
+
+		else if(x==3 && y==0){
+				//default mode
+				if(*mode=='1'){
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_LS*0;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE1_C;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1*0;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+
+				}
+				else{
+				sampleBuffer[3][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_LS*0;	//ls
+				sampleBuffer[0][j]=tempBuffer[0][j]*amplitude;	//l
+				sampleBuffer[1][j]=tempBuffer[0][j]*amplitude *INPUT_MODE0_C;	//c
+				sampleBuffer[4][j]=tempBuffer[1][j]*amplitude * -1*0;	//rs
+				sampleBuffer[2][j]=tempBuffer[1][j]*amplitude;	//r
+				}
+			
+			gst_audio_invert_transform(&data,sampleBuffer[2], sampleBuffer[2], BLOCK_SIZE); //R inv
+			gst_audio_invert_transform(&data,sampleBuffer[0], sampleBuffer[0], BLOCK_SIZE); //L inv
+	}
+}
+}
+
+inline float dBToAmplitude(float dB)
+{
+  return pow(10.0f, dB/20.0f);
 }
 
 
@@ -81,6 +158,7 @@ int main(int argc, char* argv[])
 	FILE *wav_out=NULL;
 	char WavInputName[256];
 	char WavOutputName[256];
+	
 	WAV_HEADER inputWAVhdr,outputWAVhdr;	
 
 	// Init channel buffers
@@ -93,7 +171,18 @@ int main(int argc, char* argv[])
 	wav_in = OpenWavFileForRead (WavInputName,"rb");
 	strcpy(WavOutputName,argv[2]);
 	wav_out = OpenWavFileForRead (WavOutputName,"wb");
+	//mode selection
+	strcpy(mode,argv[3]);
+	strcpy(decibels,argv[4]);
+	strcpy(outputMode,argv[5]);
+	float dB=strtol(decibels,&pEnd,10);
 	
+	float amplitude=dBToAmplitude(dB); //konvertovanje amplitude u decimalnu reprezentaciju
+	
+	//float oMode1value=strtol(oMode1,&pEnd,10);
+	//float oMode2value=strtol(oMode2,&pEnd,10);
+
+
 	/*promeniti mu da ocitava mode kao argument,i da prosledi dole u processingu*/
 	//-------------------------------------------------
 
@@ -144,7 +233,7 @@ int main(int argc, char* argv[])
 				}
 			}
 
-			processing();
+			processing(amplitude,2,2);
 
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
