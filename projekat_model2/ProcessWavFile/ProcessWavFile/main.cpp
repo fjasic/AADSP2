@@ -24,12 +24,13 @@ void gst_audio_invert_transform()
 {	
 	DSPfract *leftOutput1=sampleBuffer[0];
 	DSPfract *rightOutput1=sampleBuffer[2];
+
 	if(data.whichChannelInvert==2)
 	{	 
 		for (int i = 0; i < BLOCK_SIZE; i++) 
 		{
 		val = *leftOutput1 * dry;
-		val-= (1.0 + *leftOutput1) * data.degree;
+		val-= (FRACT_NUM(1.0) + *leftOutput1) * data.degree;
 		*leftOutput1 = val * data.gain;
 		leftOutput1++;
 		}
@@ -39,7 +40,7 @@ void gst_audio_invert_transform()
 		for (int i = 0; i < BLOCK_SIZE; i++) 
 		{
 		val = *rightOutput1 * dry;
-		val-= (1.0 + *rightOutput1) * data.degree;
+		val-= (FRACT_NUM(1.0) + *rightOutput1) * data.degree;
 		*rightOutput1 = val * data.gain;
 		rightOutput1++;
 		}
@@ -67,13 +68,15 @@ void processing()
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*centralOutput=*centralInput*input_gain;
-				*centralOutput=*centralOutput * INPUT_MODE1_C;	//c
-				*lsOutput=*lsInput*input_gain;
-				*lsOutput=*lsOutput * INPUT_MODE1_LS;	//ls
+				*centralInput=*centralInput*input_gain;	//c
+				*centralInput=*centralInput*INPUT_MODE1_C;
+				*centralOutput=*centralInput;
+				*lsInput=*lsInput*input_gain;
+				*lsInput=*lsInput *INPUT_MODE1_LS;	//ls
+				*lsOutput=*lsInput;
 
 				*rightOutput=*rightInput*input_gain;	//r
 				*rsOutput=*rsInput*input_gain * -1;	//rs
@@ -90,21 +93,23 @@ void processing()
 				rightInput++;
 				leftInput++;
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+			//	data.whichChannelInvert=2;
+			//	gst_audio_invert_transform(); //R inv
+			//	data.whichChannelInvert=0;
+			//	gst_audio_invert_transform(); //L inv	
 			break;
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput * input_gain ;	//l
-				*centralOutput=*centralInput*input_gain;
-				*centralOutput=*centralOutput * INPUT_MODE0_C;//c
-				*lsOutput=*lsInput * input_gain;
-				*lsOutput=*lsOutput *INPUT_MODE0_LS;	//ls
+				*leftOutput=*leftInput*input_gain ;	//l
+				*centralInput=*centralInput*input_gain;
+				*centralInput=*centralInput*INPUT_MODE0_C;	//c
+				*centralOutput=*centralInput;
+				*lsInput=*lsInput*input_gain;
+				*lsInput=*lsInput*INPUT_MODE0_LS;	//ls
+				*lsOutput=*lsInput;
 
 				*rightOutput=*rightInput*input_gain;	//r
 				*rsOutput=*rsInput*input_gain * -1;	//rs
@@ -139,12 +144,11 @@ void processing()
 		switch(mode_switch)
 		{
 			case MODE1:
-				for(DSPint j=0; j<BLOCK_SIZE; j++)
+				for(int j=0; j<BLOCK_SIZE; j++)
 				{
-				*leftOutput=DSPaccum(*leftInput);
-				*leftOutput=*leftOutput*input_gain;	//l
-				*rightOutput=DSPaccum(*rightInput);
-				*rightOutput=*rightOutput*input_gain;//r
+				*leftOutput=*leftInput*input_gain ;	//l
+				*rightOutput=*rightInput*input_gain;	//r
+
 				leftOutput++;
 				rightOutput++;
 				
@@ -159,7 +163,7 @@ void processing()
 
 
 			case MODE0:
-				for(DSPint j=0; j<BLOCK_SIZE; j++)
+				for(int j=0; j<BLOCK_SIZE; j++)
 				{
 				*leftOutput=*leftInput*input_gain ;	//l
 				*rightOutput=*rightInput*input_gain;	//r
@@ -192,12 +196,12 @@ void processing()
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*lsOutput=*lsInput*input_gain;
-				*lsOutput=*lsOutput * INPUT_MODE1_LS;	//ls
-
+				*lsInput=*lsInput*input_gain;
+				*lsInput=*lsInput*INPUT_MODE1_LS;	//ls
+				*lsOutput=*lsInput;
 				*rightOutput=*rightInput*input_gain;	//r
 				*rsOutput=*rsInput*input_gain * -1;	//rs
 
@@ -219,12 +223,12 @@ void processing()
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*lsOutput=*lsInput * input_gain;
-				*lsOutput=*lsOutput *INPUT_MODE0_LS;	//ls
-
+				*lsInput=*lsInput*input_gain;
+				*lsInput=*lsInput*INPUT_MODE0_LS;	//ls
+				*lsOutput=*lsInput;
 				*rightOutput=*rightInput*input_gain;	//r
 				*rsOutput=*rsInput*input_gain * -1;	//rs
 
@@ -258,11 +262,12 @@ void processing()
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*centralOutput=*centralInput*input_gain;
-				*centralOutput=*centralOutput * INPUT_MODE1_C;//c
+				*centralInput=*centralInput*input_gain;
+				*centralInput=*centralInput*INPUT_MODE1_C;	//c
+				*centralOutput=*centralInput;
 				*rightOutput=*rightInput*input_gain;	//r
 			
 				leftOutput++;
@@ -281,11 +286,12 @@ void processing()
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput *input_gain ;	//l
-				*centralOutput=*centralInput*input_gain;
-				*centralOutput=*centralOutput * INPUT_MODE0_C;//c
+				*leftOutput=*leftInput*input_gain ;	//l
+				*centralInput=*centralInput*input_gain;
+				*centralInput=*centralInput*INPUT_MODE0_C;	//c
+				*centralOutput=*centralInput;
 				*rightOutput=*rightInput*input_gain;	//r
 
 				leftOutput++;
@@ -318,9 +324,15 @@ int main(int argc, char* argv[])
 	WAV_HEADER inputWAVhdr,outputWAVhdr;	
 
 	// Init channel buffers
-	for(int i=0; i<MAX_NUM_CHANNEL; i++)
-		memset(&sampleBuffer[i],0,BLOCK_SIZE);
-	
+		// Init channel buffers
+	for(DSPint i=0; i<MAX_NUM_CHANNEL; i++)
+	{
+		for(DSPint j=0; j<BLOCK_SIZE; j++)
+		{
+			sampleBuffer[i][j] = FRACT_NUM(0.0);
+			tempBuffer[i][j] = FRACT_NUM(0.0);
+		}
+	}
 	// Open input and output wav files
 	//-------------------------------------------------
 	strcpy(WavInputName,argv[1]);
@@ -345,11 +357,10 @@ int main(int argc, char* argv[])
 	
 	//decibel input
 	strcpy(decibels,argv[4]);
-	//input_gain=strtol(decibels,&pEnd,10);
-	//input_gain = 1;
-	//printf("%f",input_gain);
-	//input_gain=pow(10.0f, input_gain);; //konvertovanje input_gain u decimalnu reprezentaciju
-	//printf("%f dB\n",input_gain);
+	input_gain=strtol(decibels,&pEnd,10);
+	//input_gain=dBToinput_gain(); //konvertovanje input_gain u decimalnu reprezentaciju
+	//ovde mu direktno unosim u decimalnom obliku
+	printf("%f dB\n",input_gain);
 
 	//mode selection
 	int mode=atoi(argv[5]);
@@ -447,7 +458,7 @@ int main(int argc, char* argv[])
 					sample = 0; //debug
 					fread(&sample, BytesPerSample, 1, wav_in);
 					sample = sample << (32 - inputWAVhdr.fmt.BitsPerSample); // force signextend
-					tempBuffer[k][j] = sample / SAMPLE_SCALE;				// scale sample to 1.0/-1.0 range		
+					tempBuffer[k][j] = FRACT_NUM(sample / SAMPLE_SCALE);				// scale sample to 1.0/-1.0 range		
 				}
 			}
 			if(enable==1)

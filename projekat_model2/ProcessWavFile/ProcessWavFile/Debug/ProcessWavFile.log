@@ -1,30 +1,30 @@
-﻿Build started 12/3/2018 2:56:48 AM.
-     1>Project "C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" on node 2 (build target(s)).
+﻿Build started 3.12.2018 17:58:07.
+     1>Project "C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Debug\projekat_model2.unsuccessfulbuild".
+         Creating "Debug\projekat_model2.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\fili\desktop\projekat\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(326): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(338): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\fili\desktop\projekat\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(328): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(340): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\fili\desktop\projekat\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(347): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(359): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Debug\projekat_model2.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.lib" /MACHINE:X86 Debug\fixed_point_math.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Debug\projekat_model2.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.lib" /MACHINE:X86 Debug\fixed_point_math.obj
          Debug\main.obj
          Debug\stdfix_emu.obj
          Debug\WAVheader.obj
      1>fixed_point_math.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-         ProcessWavFile.vcxproj -> C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe
+         ProcessWavFile.vcxproj -> C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe;#1" /manifest Debug\projekat_model2.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe;#1" /manifest Debug\projekat_model2.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
        FinalizeBuildStatus:
          Deleting file "Debug\projekat_model2.unsuccessfulbuild".
          Touching "Debug\projekat_model2.lastbuildstate".
-     1>Done Building Project "C:\Users\fili\Desktop\projekat\AADSP2\projekat_model2\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.42
+Time Elapsed 00:00:01.01

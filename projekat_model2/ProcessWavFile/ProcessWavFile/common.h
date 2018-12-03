@@ -13,13 +13,13 @@ typedef int DSPint;						/* native integer */
 typedef fract DSPfract;				    /* DSP fixed-point fractional */
 typedef long_accum DSPaccum;            /* DSP Accumulator */
 
-DSPfract  INPUT_GAIN    =  0.5011872336272722;
+DSPfract  INPUT_GAIN    =  FRACT_NUM(0.5011872336272722);
 
-DSPfract  INPUT_MODE0_LS= 0.15848931924611134;
-DSPfract  INPUT_MODE0_C = 1.7782794100389228;
+DSPfract  INPUT_MODE0_LS= FRACT_NUM(0.15848931924611134);
+DSPfract  INPUT_MODE0_C = FRACT_NUM(0.8891397050194614);//1.7782794100389228
 
-DSPfract  INPUT_MODE1_LS= 0.5011872336272722;
-DSPfract  INPUT_MODE1_C = 1.4125375446227544;
+DSPfract  INPUT_MODE1_LS= FRACT_NUM(0.5011872336272722);
+DSPfract  INPUT_MODE1_C = FRACT_NUM(0.7062687723113772);//1.4125375446227544
 
 DSPfract sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 
@@ -43,10 +43,10 @@ enum mode_controls {MODE0,MODE1};
 mode_controls mode_switch=MODE1;
 
 
-DSPfract input_gain = DSPfract(0.5011872336272722); // -6dB - default input gain
-DSPint enable = 1; // default enable switch
+DSPfract input_gain = FRACT_NUM(0.5011872336272722); // -6dB - default input gain
+DSPint enable = FRACT_NUM(1.0); // default enable switch
 
-DSPfract dry = 1.0 - data.degree;
+DSPfract dry = FRACT_NUM(1.0) - data.degree;
 DSPfract val;
 
 DSPfract* centralOutput;
@@ -62,7 +62,5 @@ DSPfract* rsInput;
 
 DSPfract* rightInput;
 DSPfract* leftInput;
-
-
 
 #endif
