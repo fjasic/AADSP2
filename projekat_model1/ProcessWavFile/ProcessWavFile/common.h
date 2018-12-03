@@ -25,7 +25,6 @@ typedef struct {
 	float degree;
 	float gain;
 	int whichChannelInvert;
-	int outputChannelNumber;
 } inverter_data_t;
 
 inverter_data_t data;
