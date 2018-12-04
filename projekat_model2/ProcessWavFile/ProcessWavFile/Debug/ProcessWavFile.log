@@ -1,15 +1,15 @@
-﻿Build started 3.12.2018 17:58:07.
+﻿Build started 4.12.2018 18:38:13.
      1>Project "C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\ProcessWavFile\ProcessWavFile.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\projekat_model2.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(338): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(343): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(340): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(345): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
-     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(359): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\student\desktop\ra46-2014\projekat\modeli\aadsp2\projekat_model2\processwavfile\processwavfile\main.cpp(364): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Debug\projekat_model2.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\student\Desktop\RA46-2014\Projekat\modeli\AADSP2\projekat_model2\ProcessWavFile\Debug\projekat_model2.lib" /MACHINE:X86 Debug\fixed_point_math.obj
@@ -27,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.01
+Time Elapsed 00:00:00.90

@@ -43,10 +43,11 @@ enum mode_controls {MODE0,MODE1};
 mode_controls mode_switch=MODE1;
 
 
-DSPfract input_gain = FRACT_NUM(0.5011872336272722); // -6dB - default input gain
-DSPint enable = FRACT_NUM(1.0); // default enable switch
+DSPfract input_gain = FRACT_NUM(0.5); // -6dB - default input gain
 
-DSPfract dry = FRACT_NUM(1.0) - data.degree;
+DSPint enable = (DSPfract)1.0; // default enable switch
+
+DSPfract dry = (DSPfract)1.0 - data.degree;
 DSPfract val;
 
 DSPfract* centralOutput;
