@@ -19,7 +19,7 @@ void audio_invert_init()
 	data.degree = FRACT_NUM(0.0); 
 	data.gain = FRACT_NUM(-1.0);
 }
-
+/*
 void gst_audio_invert_transform()
 {	
 	DSPfract *leftOutput1=sampleBuffer[0];
@@ -43,7 +43,7 @@ void gst_audio_invert_transform()
 		}
 	}
 }
-
+*/
 
 void processing()
 {
@@ -108,15 +108,21 @@ void processing()
 			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*centralInput=*centralInput*input_gain;
-				*centralInput=*centralInput*INPUT_MODE0_C;	//c
-				*centralOutput=*centralInput;
-				*lsInput=*lsInput*input_gain;
-				*lsInput=*lsInput*INPUT_MODE0_LS;	//ls
-				*lsOutput=*lsInput;
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+				*centralOutput=*centralInput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsInput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE0_LS;	//ls
+				*lsOutput=*lsOutput<<1;
 
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
@@ -128,13 +134,13 @@ void processing()
 				lsInput++;
 				rsInput++;
 				rightInput++;
-				leftInput++;
+				leftInput++;	
 			}
 
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 		}
 		
@@ -152,18 +158,23 @@ void processing()
 				for(DSPint j=0; j<BLOCK_SIZE; j++)
 				{
 				*leftOutput=*leftInput*input_gain ;	//l
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+			
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
 				
 				rightInput++;
-				leftInput++;
+				leftInput++;	
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 
 
@@ -171,18 +182,23 @@ void processing()
 				for(DSPint j=0; j<BLOCK_SIZE; j++)
 				{
 				*leftOutput=*leftInput*input_gain ;	//l
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+			
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
 				
 				rightInput++;
-				leftInput++;
+				leftInput++;	
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 			}
 		
@@ -204,11 +220,17 @@ void processing()
 			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*lsInput=*lsInput*input_gain;
-				*lsInput=*lsInput*INPUT_MODE1_LS;	//ls
-				*lsOutput=*lsInput;
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+				*lsOutput=*lsInput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE1_LS;	//ls
+				*lsOutput=*lsOutput<<1;
+
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
@@ -220,10 +242,10 @@ void processing()
 				rightInput++;
 				leftInput++;
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv		
 			break;
 
 
@@ -231,11 +253,17 @@ void processing()
 			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*lsInput=*lsInput*input_gain;
-				*lsInput=*lsInput*INPUT_MODE0_LS;	//ls
-				*lsOutput=*lsInput;
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+				*lsOutput=*lsInput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE0_LS;	//ls
+				*lsOutput=*lsOutput<<1;
+
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
@@ -247,10 +275,10 @@ void processing()
 				rightInput++;
 				leftInput++;
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+			//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 		}
 		
@@ -270,23 +298,29 @@ void processing()
 			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*centralInput=*centralInput*input_gain;
-				*centralInput=*centralInput*INPUT_MODE1_C;	//c
-				*centralOutput=*centralInput;
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+				*centralOutput=*centralInput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE1_C;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+
 				*rightOutput=*rightInput*input_gain;	//r
-			
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
+
 				leftOutput++;
 				rightOutput++;
 				centralOutput++;
-			
+
 				centralInput++;
 				rightInput++;
-				leftInput++;
+				leftInput++;	
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 
 
@@ -294,10 +328,16 @@ void processing()
 			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftInput*input_gain ;	//l
-				*centralInput=*centralInput*input_gain;
-				*centralInput=*centralInput*INPUT_MODE0_C;	//c
-				*centralOutput=*centralInput;
+				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput<<1;
+				*centralOutput=*centralInput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+
 				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
@@ -305,18 +345,24 @@ void processing()
 
 				centralInput++;
 				rightInput++;
-				leftInput++;
+				leftInput++;	
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+				//data.whichChannelInvert=2;
+				//gst_audio_invert_transform(); //R inv
+				//data.whichChannelInvert=0;
+				//gst_audio_invert_transform(); //L inv	
 			break;
 		}
 		
 		break;
 
 	}
+}
+
+DSPfract dBToinput_gain()
+{
+  input_gain=input_gain/(DSPfract)20.0;
+  return FRACT_NUM(pow(10.0f, input_gain));
 }
 
 DSPint main(DSPint argc, char* argv[])
@@ -361,11 +407,11 @@ DSPint main(DSPint argc, char* argv[])
 	printf("enabled(1) or not(0) %d\n",enable);
 	
 	//decibel input
-	strcpy(decibels,argv[4]);
+	//strcpy(decibels,argv[4]);
 	//input_gain=strtol(decibels,&pEnd,10);
 	//input_gain=dBToinput_gain(); //konvertovanje input_gain u decimalnu reprezentaciju
 	//ovde mu direktno unosim u decimalnom obliku
-	printf("%f dB\n",input_gain);
+	//printf("%f dB\n",input_gain.toLong());
 
 	//mode selection
 	DSPint mode=atoi(argv[5]);
