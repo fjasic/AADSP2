@@ -1,12 +1,9 @@
 #ifndef COMMON_H
 #define COMMON_H
-
-#include "stdfix_emu.h"
-
 #define BLOCK_SIZE 16
 #define MAX_NUM_CHANNEL 8
 #define NUM_CHANNEL_OUT  5
-
+#include "stdfix_emu.h"
 typedef short DSPshort;					/* DSP integer */
 typedef unsigned short DSPushort;		/* DSP unsigned integer */
 typedef int DSPint;						/* native integer */

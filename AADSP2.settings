@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+<clideViews>
+<clideView viewId="clide.debug.ui.memoryView">
+<memoryTab columnCount="8" core="DSP_A" memoryZone="Y" tabAddress="0"/>
+</clideView>
+<clideView viewId="clide.debug.ui.registersView">
+<registerView regViewCoreName="DSP_A">
+<regViewMementoCore scrollPercent="0.09210526" selectedItem="/DSP_A/Data registers">
+<layoutType horizontal="0" register_details="1"/>
+<expandedPath item_0="DSP_A"/>
+<expandedPath item_0="DSP_A" item_1="Data registers"/>
+<expandedPath item_0="DSP_A" item_1="Accum registers"/>
+<expandedPath item_0="DSP_A" item_1="Index registers"/>
+<expandedPath item_0="DSP_A" item_1="Modulo registers"/>
+<expandedPath item_0="DSP_A" item_1="Control registers"/>
+<expandedPath item_0="DSP_A" item_1="Loop registers"/>
+<expandedPath item_0="DSP_A" item_1="Call registers"/>
+<expandedPath item_0="DSP_A" item_1="Rand registers"/>
+<expandedPath item_0="DSP_A" item_1="Page registers"/>
+</regViewMementoCore>
+</registerView>
+</clideView>
+</clideViews>
+<perspective id="CLIDE.DebugPerspective"/>
+<workbench_editors>
+<editor file_path="/projekat_model3/.suldproj"/>
+<editor file_path="/projekat_model3/src/main.c"/>
+<editor file_path="/projekat_model3/inc/common.h"/>
+</workbench_editors>
+<views/>
+<watchExpressions/>
+<launcherConfiguration/>
+<launchHistory>
+<launchGroup id="org.eclipse.ui.externaltools.launchGroup">&#x0A;<mruHistory/>
+<favorites/>
+</launchGroup>
+<launchGroup id="org.eclipse.debug.ui.launchGroup.profile">&#x0A;<mruHistory/>
+<favorites/>
+</launchGroup>
+<launchGroup id="org.eclipse.debug.ui.launchGroup.debug">&#x0A;<mruHistory>&#x0A;<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#x0D;&#x0A;&lt;launchConfiguration local=&quot;true&quot; path=&quot;APP new Configuration&quot;/&gt;&#x0D;&#x0A;"/>
+</mruHistory>
+<favorites/>
+</launchGroup>
+<launchGroup id="org.eclipse.debug.ui.launchGroup.run">&#x0A;<mruHistory/>
+<favorites/>
+</launchGroup>
+</launchHistory>
+<projectSettings/>
+</settings>
