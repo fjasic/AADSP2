@@ -16,8 +16,8 @@
 
 void audio_invert_init()
 {
-	data.degree = 0; 
-	data.gain = -1.0;
+	data.degree = 0.0; 
+	data.gain = -0.1;
 }
 
 void gst_audio_invert_transform()
@@ -42,54 +42,43 @@ void gst_audio_invert_transform()
 		rightOutput1++;
 		}
 	}
+	
 }
 
 
 void processing()
 {
-
+	leftOutput=sampleBuffer[0];
+	rightOutput=sampleBuffer[2];
+	centralOutput=sampleBuffer[1];	
+	lsOutput=sampleBuffer[3];	
+	rsOutput=sampleBuffer[4];
 	switch(outputMode)
 	{
 	case MODE_3_2_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			centralInput=tempBuffer[0];	
-			lsInput=tempBuffer[0];	
-			rsInput=tempBuffer[1];	
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			centralOutput=sampleBuffer[1];	
-			lsOutput=sampleBuffer[3];	
-			rsOutput=sampleBuffer[4];
 		switch(mode_switch)
 		{
 		case MODE1:
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*centralOutput=*centralInput*input_gain *INPUT_MODE1_C;	//c
-				*lsOutput=*lsInput*input_gain *INPUT_MODE1_LS;	//ls
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE1_C;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE1_LS;	//ls
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 
 				leftOutput++;
 				rightOutput++;
 				rsOutput++;
 				centralOutput++;
 				lsOutput++;
-
-				centralInput++;
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
-				data.whichChannelInvert=2;
-				gst_audio_invert_transform(); //R inv
-				data.whichChannelInvert=0;
-				gst_audio_invert_transform(); //L inv	
+			data.whichChannelInvert=2;	
+			gst_audio_invert_transform(); //R inv
+			data.whichChannelInvert=0;
+			gst_audio_invert_transform(); //L inv	
+			
 			break;
 
 
@@ -125,24 +114,23 @@ void processing()
 		break;
 
 		case MODE_2_0_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
 		switch(mode_switch)
 		{
 			case MODE1:
 				for(int j=0; j<BLOCK_SIZE; j++)
 				{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*rightOutput=*rightInput*input_gain;	//r
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE1_C*0;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE1_LS*0;	//ls
+
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
 
 				leftOutput++;
 				rightOutput++;
-				
-				rightInput++;
-				leftInput++;
+				rsOutput++;
+				centralOutput++;
+				lsOutput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -154,14 +142,18 @@ void processing()
 			case MODE0:
 				for(int j=0; j<BLOCK_SIZE; j++)
 				{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*rightOutput=*rightInput*input_gain;	//r
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE0_C*0;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE0_LS*0;	//ls
+
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
 
 				leftOutput++;
 				rightOutput++;
-				
-				rightInput++;
-				leftInput++;
+				rsOutput++;
+				centralOutput++;
+				lsOutput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -173,35 +165,23 @@ void processing()
 		break;
 
 		case MODE_2_2_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			lsInput=tempBuffer[0];	
-			rsInput=tempBuffer[1];	
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			lsOutput=sampleBuffer[3];	
-			rsOutput=sampleBuffer[4];
 		switch(mode_switch)
 		{
 		case MODE1:
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*lsOutput=*lsInput*input_gain *INPUT_MODE1_LS;	//ls
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE1_C*0;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE1_LS;	//ls
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 
 				leftOutput++;
 				rightOutput++;
 				rsOutput++;
+				centralOutput++;
 				lsOutput++;
-
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -213,21 +193,18 @@ void processing()
 		case MODE0:
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*lsOutput=*lsInput*input_gain *INPUT_MODE0_LS;	//ls
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE0_C*0;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE0_LS;	//ls
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 
 				leftOutput++;
 				rightOutput++;
 				rsOutput++;
+				centralOutput++;
 				lsOutput++;
-
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -239,30 +216,23 @@ void processing()
 		break;
 
 		case MODE_3_0_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			centralInput=tempBuffer[0];	
-	
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			centralOutput=sampleBuffer[1];	
 		switch(mode_switch)
 		{
 		case MODE1:
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*centralOutput=*centralInput*input_gain *INPUT_MODE1_C;	//c
-		
-				*rightOutput=*rightInput*input_gain;	//r
-			
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE1_C;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE1_LS*0;	//ls
+
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
+
 				leftOutput++;
 				rightOutput++;
+				rsOutput++;
 				centralOutput++;
-			
-				centralInput++;
-				rightInput++;
-				leftInput++;
+				lsOutput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -274,18 +244,18 @@ void processing()
 		case MODE0:
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*centralOutput=*centralInput*input_gain *INPUT_MODE0_C;	//c
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*centralOutput=*centralOutput*input_gain *INPUT_MODE0_C;	//c
+				*lsOutput=*lsOutput*input_gain *INPUT_MODE0_LS*0;	//ls
 
-				*rightOutput=*rightInput*input_gain;	//r
+				*rightOutput=*rightOutput*input_gain;	//r
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
 
 				leftOutput++;
 				rightOutput++;
+				rsOutput++;
 				centralOutput++;
-
-				centralInput++;
-				rightInput++;
-				leftInput++;
+				lsOutput++;
 			}
 				data.whichChannelInvert=2;
 				gst_audio_invert_transform(); //R inv
@@ -437,12 +407,12 @@ int main(int argc, char* argv[])
 		{	
 			for(int j=0; j<BLOCK_SIZE; j++)
 			{
-				for(int k=0; k<inputWAVhdr.fmt.NumChannels; k++)
+				for(int k=0; k<outputWAVhdr.fmt.NumChannels; k++)
 				{	
 					sample = 0; //debug
 					fread(&sample, BytesPerSample, 1, wav_in);
 					sample = sample << (32 - inputWAVhdr.fmt.BitsPerSample); // force signextend
-					tempBuffer[k][j] = sample / SAMPLE_SCALE;				// scale sample to 1.0/-1.0 range		
+					sampleBuffer[k][j] = sample / SAMPLE_SCALE;				// scale sample to 1.0/-1.0 range		
 				}
 			}
 			if(enable==1)
@@ -453,6 +423,7 @@ int main(int argc, char* argv[])
 			{
 				for(int k=0; k<outputWAVhdr.fmt.NumChannels; k++)
 				{	
+					
 					sample = sampleBuffer[k][j] * SAMPLE_SCALE ;	// crude, non-rounding 			
 					sample = sample >> (32 - inputWAVhdr.fmt.BitsPerSample);
 					fwrite(&sample, outputWAVhdr.fmt.BitsPerSample/8, 1, wav_out);		

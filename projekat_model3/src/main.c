@@ -16,73 +16,60 @@
 
 void audio_invert_init()
 {
-	data.degree = FRACT_NUM(0.0);
-	data.gain = FRACT_NUM(-1.0);
+	data.degree = FRACT_NUM(0.0); 
+	data.gain = FRACT_NUM(-0.1);
 }
-/*
-void gst_audio_invert_transform()
-{
-	DSPfract *leftOutput1=sampleBuffer[0];
-	DSPfract *rightOutput1=sampleBuffer[2];
-	if(data.whichChannelInvert==2)
-	{
-		for (DSPint i = 0; i < BLOCK_SIZE; i++)
-		{
-		val = *leftOutput1 * dry - (*leftOutput1) * data.degree;
-		*leftOutput1 = val * data.gain;
-		leftOutput1++;
-		}
-	}
-	else if(data.whichChannelInvert==0)
-	{
-		for (DSPint i = 0; i < BLOCK_SIZE; i++)
-		{
-		val = *rightOutput1 * dry - (*rightOutput1) * data.degree;
-		*rightOutput1 = val * data.gain;
-		rightOutput1++;
-		}
-	}
+
+void gst_audio_invert_transform(DSPfract * input, DSPfract * output)
+{	
+	DSPint i;
+  DSPfract dry = FRACT_NUM(0.999) - data.degree;
+  dry = dry + FRACT_NUM(0.001);
+  DSPaccum val;
+  DSPfract tmp;
+  DSPfract tmp1 = FRACT_NUM(0.5);
+
+  for(i = 0; i < BLOCK_SIZE; i++)
+  {
+	tmp = (tmp1 + ((*input)>>1)); 			
+	val = ((*input)>>1) * (dry) - tmp * data.degree;
+	input++;
+	(*output) = ((DSPfract)val * data.gain)<<1;
+	output++;
 }
-*/
+
+}
 
 
 void processing()
 {
+	leftOutput=sampleBuffer[0];
+	rightOutput=sampleBuffer[2];
+	centralOutput=sampleBuffer[1];	
+	lsOutput=sampleBuffer[3];	
+	rsOutput=sampleBuffer[4];
 
 	switch(outputMode)
 	{
 	case MODE_3_2_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			centralInput=tempBuffer[0];
-			lsInput=tempBuffer[0];
-			rsInput=tempBuffer[1];
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			centralOutput=sampleBuffer[1];
-			lsOutput=sampleBuffer[3];
-			rsOutput=sampleBuffer[4];
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralInput*input_gain;
+				*centralOutput=*centralOutput*input_gain; 
 				*centralOutput=*centralOutput*INPUT_MODE1_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
-				*lsOutput=*lsInput*input_gain;
+				*lsOutput=*lsOutput*input_gain;
 				*lsOutput=*lsOutput*INPUT_MODE1_LS;	//ls
 				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
@@ -90,39 +77,31 @@ void processing()
 				rsOutput++;
 				centralOutput++;
 				lsOutput++;
-
-				centralInput++;
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
-			//data.whichChannelInvert=2;
-			//gst_audio_invert_transform(); //R inv
-			//data.whichChannelInvert=0;
-			//gst_audio_invert_transform(); //L inv
 
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			
+		
 			break;
 
 
 		case MODE0:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralInput*input_gain;
+				*centralOutput=*centralOutput*input_gain; 
 				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
-				*lsOutput=*lsInput*input_gain;
+				*lsOutput=*lsOutput*input_gain;
 				*lsOutput=*lsOutput*INPUT_MODE0_LS;	//ls
 				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
@@ -130,241 +109,207 @@ void processing()
 				rsOutput++;
 				centralOutput++;
 				lsOutput++;
-
-				centralInput++;
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
-			//data.whichChannelInvert=2;
-			//gst_audio_invert_transform(); //R inv
-			//data.whichChannelInvert=0;
-			//gst_audio_invert_transform(); //L inv
+
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
 			break;
 		}
-
+		
 		break;
 
 		case MODE_2_0_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
 		switch(mode_switch)
 		{
 			case MODE1:
-				for(j=0; j<BLOCK_SIZE; j++)
+				for(DSPint j=0; j<BLOCK_SIZE; j++)
 				{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
-				*leftOutput=*leftOutput<<1;
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
+				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE1_C*0;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE1_LS*0;	//ls
+				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
-
-				rightInput++;
-				leftInput++;
+				rsOutput++;
+				centralOutput++;
+				lsOutput++;
 			}
-			//data.whichChannelInvert=2;
-			//gst_audio_invert_transform(); //R inv
-			//data.whichChannelInvert=0;
-			//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
 			break;
 
 
 			case MODE0:
-				for(j=0; j<BLOCK_SIZE; j++)
+				for(DSPint j=0; j<BLOCK_SIZE; j++)
 				{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
+				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE0_C*0;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE0_LS*0;	//ls
+				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
-
-				rightInput++;
-				leftInput++;
+				rsOutput++;
+				centralOutput++;
+				lsOutput++;
 			}
-				//data.whichChannelInvert=2;
-				//gst_audio_invert_transform(); //R inv
-				//data.whichChannelInvert=0;
-				//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
 			break;
 			}
-
+		
 		break;
 
 		case MODE_2_2_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			lsInput=tempBuffer[0];
-			rsInput=tempBuffer[1];
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			lsOutput=sampleBuffer[3];
-			rsOutput=sampleBuffer[4];
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
-				*leftOutput=*leftOutput<<1;
-				*lsOutput=*lsInput*input_gain;
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
+				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE1_C*0;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
 				*lsOutput=*lsOutput*INPUT_MODE1_LS;	//ls
 				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
 				rsOutput++;
+				centralOutput++;
 				lsOutput++;
-
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
 			}
-				//data.whichChannelInvert=2;
-				//gst_audio_invert_transform(); //R inv
-				//data.whichChannelInvert=0;
-				//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv		
 			break;
 
 
 		case MODE0:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*lsOutput=*lsInput*input_gain;
+				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*INPUT_MODE0_C*0;	//c
+				*centralOutput=*centralOutput<<1;
+				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
 				*lsOutput=*lsOutput*INPUT_MODE0_LS;	//ls
 				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
-				*rsOutput=*rsInput*input_gain * -1;	//rs
+				*rsOutput=*rsOutput*input_gain * -1;	//rs
 				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
 				rsOutput++;
-				lsOutput++;
-
-				lsInput++;
-				rsInput++;
-				rightInput++;
-				leftInput++;
+				centralOutput++;
+				lsOutput++;	
 			}
-			//data.whichChannelInvert=2;
-				//gst_audio_invert_transform(); //R inv
-				//data.whichChannelInvert=0;
-				//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv		
 			break;
 		}
-
+		
 		break;
 
 		case MODE_3_0_0:
-			leftInput=tempBuffer[0];
-			rightInput=tempBuffer[1];
-			centralInput=tempBuffer[0];
-
-			leftOutput=sampleBuffer[0];
-			rightOutput=sampleBuffer[2];
-			centralOutput=sampleBuffer[1];
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
-				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralInput*input_gain;
+				*leftOutput=*leftOutput*input_gain ;	//l
+				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
+				*centralOutput=*centralOutput*input_gain; 
 				*centralOutput=*centralOutput*INPUT_MODE1_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE1_LS*0;	//ls
+				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
+				rsOutput++;
 				centralOutput++;
-
-				centralInput++;
-				rightInput++;
-				leftInput++;
+				lsOutput++;
 			}
-				//data.whichChannelInvert=2;
-				//gst_audio_invert_transform(); //R inv
-				//data.whichChannelInvert=0;
-				//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
 			break;
 
 
 		case MODE0:
-			for(j=0; j<BLOCK_SIZE; j++)
+			for(DSPint j=0; j<BLOCK_SIZE; j++)
 			{
-				*leftOutput=*leftInput*input_gain ;	//l
-				*leftOutput=*leftOutput*FRACT_NUM(-1.0);
+				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralInput*input_gain;
+				*centralOutput=*centralOutput*input_gain; 
 				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
+				*lsOutput=*lsOutput*input_gain;
+				*lsOutput=*lsOutput*INPUT_MODE0_LS*0;	//ls
+				*lsOutput=*lsOutput<<1;
 
-				*rightOutput=*rightInput*input_gain;	//r
-				*rightOutput=*rightOutput*FRACT_NUM(-1.0);
+				*rightOutput=*rightOutput*input_gain;	//r
 				*rightOutput=*rightOutput<<1;
+				*rsOutput=*rsOutput*input_gain * -1*0;	//rs
+				*rsOutput=*rsOutput<<1;
 
 				leftOutput++;
 				rightOutput++;
+				rsOutput++;
 				centralOutput++;
-
-				centralInput++;
-				rightInput++;
-				leftInput++;
+				lsOutput++;	
 			}
-				//data.whichChannelInvert=2;
-				//gst_audio_invert_transform(); //R inv
-				//data.whichChannelInvert=0;
-				//gst_audio_invert_transform(); //L inv
+			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
 			break;
 		}
-
+		
 		break;
 
 	}
 }
 
-/*DSPfract dBToinput_gain()
-{
-  input_gain=input_gain/(DSPfract)20.0;
-  return FRACT_NUM(pow(10.0f, input_gain));
-}
-*/
 
 int main(int argc, char *argv[])
  {

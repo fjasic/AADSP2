@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>"C:\Users\student\Desktop\AADSP2\projekat_model2\ProcessWavFile\speech_2ch_2.wav" "C:\Users\student\Desktop\AADSP2\projekat_model2\ProcessWavFile\output-model2-320.wav" "1" "1" "1" "3_2_0"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\Users\fili\Desktop\za postaviti\AADSP2\projekat_model2\ProcessWavFile\speech_2ch_2.wav" "C:\Users\fili\Desktop\za postaviti\AADSP2\projekat_model2\ProcessWavFile\output-model2-300.wav" "1" "1" "1" "3_0_0"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

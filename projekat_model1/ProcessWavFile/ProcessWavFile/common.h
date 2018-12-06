@@ -15,8 +15,6 @@
 
 float sampleBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 
-float tempBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
-
 char decibels[50];
 
 char* pEnd;
