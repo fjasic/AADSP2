@@ -1,12 +1,9 @@
 #ifndef COMMON_H
 #define COMMON_H
-
-#include "stdfix_emu.h"
-
 #define BLOCK_SIZE 16
 #define MAX_NUM_CHANNEL 8
 #define NUM_CHANNEL_OUT  5
-
+#include "stdfix_emu.h"
 typedef short DSPshort;					/* DSP integer */
 typedef unsigned short DSPushort;		/* DSP unsigned integer */
 typedef int DSPint;						/* native integer */
@@ -27,7 +24,7 @@ DSPfract tempBuffer[MAX_NUM_CHANNEL][BLOCK_SIZE];
 
 char decibels[50];
 
-char* pEnd;
+__memX char* pEnd;
 
 typedef struct {
 	DSPfract  degree;
@@ -43,29 +40,22 @@ enum mode_controls {MODE0,MODE1};
 enum mode_controls mode_switch=MODE1;
 
 
-DSPfract input_gain = FRACT_NUM(0.5); // -6dB - default input gain
+DSPfract input_gain; // -6dB - default input gain
+//__memX DSPint enable = (DSPfract)1.0; // default enable switch
 
-//DSPint enable = (DSPfract)1.0; // default enable switch
+DSPfract dry;
 
-//DSPfract dry = (DSPfract)1.0 - data.degree;
-DSPfract val;
+DSPaccum val;
+DSPfract tmp;
+DSPfract tmp1 = FRACT_NUM(0.5);
 
-DSPfract* centralOutput;
-DSPfract* lsOutput;
-DSPfract* rsOutput;
+__memY DSPfract* centralOutput;
+__memY DSPfract* lsOutput;
+__memY DSPfract* rsOutput;
+__memY DSPfract* rightOutput;
+__memY DSPfract* leftOutput;
 
-DSPfract* rightOutput;
-DSPfract* leftOutput;
-
-DSPfract* centralInput;
-DSPfract* lsInput;
-DSPfract* rsInput;
-
-DSPfract* rightInput;
-DSPfract* leftInput;
-
-DSPint i;
 DSPint j;
+DSPint i;
 DSPint k;
-
 #endif

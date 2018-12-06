@@ -5,7 +5,6 @@
 #include <common.h>
 #include <stdfix.h>
 #include <dsplib\wavefile.h>
-
 /**
  *
  * Swaps upper and lower half of audio samples. Mixing an inverted sample on top of
@@ -19,19 +18,16 @@ void audio_invert_init()
 	data.degree = FRACT_NUM(0.0); 
 	data.gain = FRACT_NUM(-0.1);
 }
-
-void gst_audio_invert_transform(DSPfract * input, DSPfract * output)
-{	
+void gst_audio_invert_transform(__memY DSPfract * input, __memY DSPfract * output)
+{
 	DSPint i;
   DSPfract dry = FRACT_NUM(0.999) - data.degree;
   dry = dry + FRACT_NUM(0.001);
-  DSPaccum val;
-  DSPfract tmp;
-  DSPfract tmp1 = FRACT_NUM(0.5);
+
 
   for(i = 0; i < BLOCK_SIZE; i++)
   {
-	tmp = (tmp1 + ((*input)>>1)); 			
+	tmp = (tmp1 + ((*input)>>1));
 	val = ((*input)>>1) * (dry) - tmp * data.degree;
 	input++;
 	(*output) = ((DSPfract)val * data.gain)<<1;
@@ -45,8 +41,8 @@ void processing()
 {
 	leftOutput=sampleBuffer[0];
 	rightOutput=sampleBuffer[2];
-	centralOutput=sampleBuffer[1];	
-	lsOutput=sampleBuffer[3];	
+	centralOutput=sampleBuffer[1];
+	lsOutput=sampleBuffer[3];
 	rsOutput=sampleBuffer[4];
 
 	switch(outputMode)
@@ -55,11 +51,11 @@ void processing()
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE1_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -80,18 +76,18 @@ void processing()
 			}
 
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
-			
-		
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
+
+
 			break;
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -112,21 +108,21 @@ void processing()
 			}
 
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 		}
-		
+
 		break;
 
 		case MODE_2_0_0:
 		switch(mode_switch)
 		{
 			case MODE1:
-				for(DSPint j=0; j<BLOCK_SIZE; j++)
+				for(j=0; j<BLOCK_SIZE; j++)
 				{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE1_C*0;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -146,16 +142,16 @@ void processing()
 				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 
 
 			case MODE0:
-				for(DSPint j=0; j<BLOCK_SIZE; j++)
+				for(j=0; j<BLOCK_SIZE; j++)
 				{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE0_C*0;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -175,21 +171,21 @@ void processing()
 				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 			}
-		
+
 		break;
 
 		case MODE_2_2_0:
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE1_C*0;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -209,16 +205,16 @@ void processing()
 				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv		
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE0_C*0;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -235,24 +231,24 @@ void processing()
 				rightOutput++;
 				rsOutput++;
 				centralOutput++;
-				lsOutput++;	
+				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv		
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 		}
-		
+
 		break;
 
 		case MODE_3_0_0:
 		switch(mode_switch)
 		{
 		case MODE1:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;	//ako je input gain ==1
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE1_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -272,16 +268,16 @@ void processing()
 				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 
 
 		case MODE0:
-			for(DSPint j=0; j<BLOCK_SIZE; j++)
+			for(j=0; j<BLOCK_SIZE; j++)
 			{
 				*leftOutput=*leftOutput*input_gain ;	//l
 				*leftOutput=*leftOutput<<1;
-				*centralOutput=*centralOutput*input_gain; 
+				*centralOutput=*centralOutput*input_gain;
 				*centralOutput=*centralOutput*INPUT_MODE0_C;	//c
 				*centralOutput=*centralOutput<<1;
 				*centralOutput=*centralOutput<<1;
@@ -298,13 +294,13 @@ void processing()
 				rightOutput++;
 				rsOutput++;
 				centralOutput++;
-				lsOutput++;	
+				lsOutput++;
 			}
 			gst_audio_invert_transform(sampleBuffer[2],sampleBuffer[2]); //R inv
-			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv	
+			gst_audio_invert_transform(sampleBuffer[0],sampleBuffer[0]); //L inv
 			break;
 		}
-		
+
 		break;
 
 	}
@@ -319,14 +315,13 @@ int main(int argc, char *argv[])
 	char WavInputName[256];
 	char WavOutputName[256];
 
-    int nChannels;
 	int bitsPerSample;
     int sampleRate;
     int iNumSamples;
 
 	// Open input wav file
 	//-------------------------------------------------
-	strcpy(WavInputName,"C:/Users/student/Desktop/AADSP2/projekat_model3/speech_2ch_2.wav");
+	strcpy(WavInputName,"C:/Users/fili/Desktop/AADSP2/projekat_model3/speech_2ch_2.wav");
 	wav_in = cl_wavread_open(WavInputName);
 	if(wav_in == NULL)
     {
@@ -337,7 +332,6 @@ int main(int argc, char *argv[])
 
 	// Read input wav header
 	//-------------------------------------------------
-	nChannels = cl_wavread_getnchannels(wav_in);
     bitsPerSample = cl_wavread_bits_per_sample(wav_in);
     sampleRate = cl_wavread_frame_rate(wav_in);
     iNumSamples =  cl_wavread_number_of_frames(wav_in);
@@ -345,7 +339,7 @@ int main(int argc, char *argv[])
 
 	// Open output wav file
 	//-------------------------------------------------
-	strcpy(WavOutputName,"C:/Users/student/Desktop/AADSP2/projekat_model3/output.wav");
+	strcpy(WavOutputName,"C:/Users/fili/Desktop/AADSP2/projekat_model3/output-model3-320.wav");
 	wav_out = cl_wavwrite_open(WavOutputName, bitsPerSample, NUM_CHANNEL_OUT, sampleRate);
 	if(!wav_out)
     {
@@ -374,10 +368,10 @@ int main(int argc, char *argv[])
 		{
 			for(j=0; j<BLOCK_SIZE; j++)
 			{
-				for(k=0; k<nChannels; k++)
+				for(k=0; k<5; k++)
 				{
 					sample = cl_wavread_recvsample(wav_in);
-					tempBuffer[k][j] = rbits(sample);
+					sampleBuffer[k][j] = rbits(sample);
 				}
 			}
 
@@ -390,7 +384,7 @@ int main(int argc, char *argv[])
 
 			for(j=0; j<BLOCK_SIZE; j++)
 			{
-				for(k=0; k<NUM_CHANNEL_OUT; k++)
+				for(k=0; k<5; k++)
 				{
 					sample = bitsr(sampleBuffer[k][j]);
 					cl_wavwrite_sendsample(wav_out, sample);

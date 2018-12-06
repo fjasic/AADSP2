@@ -15,16 +15,17 @@ del speech_2ch_2_model2_out.wav
 cd ..
  
 : Execute Model 0, Model 1, Model 2 and Model 3
-cd projekat_model0/ProcessWavFile/Debug/
-"projekat_model0.exe" "../../../TestStreams/speech_2ch_2.wav" "../../../OutStreams/speech_2ch_2_model0_out.wav" "1" "0" "1" "3_2_0"
-cd ../../../
-cd projekat_model1/ProcessWavFile/Debug/
-"projekat_model1.exe" "../../../TestStreams/speech_2ch_2.wav" "../../../OutStreams/speech_2ch_2_model1_out.wav" "1" "0" "1" "3_2_0"
-cd ../../../
-cd projekat_model2/ProcessWavFile/Debug/
-"projekat_model2.exe" "../../../TestStreams/speech_2ch_2.wav" "../../../OutStreams/speech_2ch_2_model2_out.wav" "1" "1" "1" "3_2_0"
-																											:zbog decimalnog zapisa
-cd ../../../
+cd bin/																							
+																								:enable|dB|mode|output_mode|degree|
+"projekat_model0.exe" "../TestStreams/speech_2ch_2.wav" "../OutStreams/speech_2ch_2_model0_out.wav" "1" "0" "1" "3_2_0" "0.0" "-0.1"
+cd ../
+cd bin/
+"projekat_model1.exe" "../TestStreams/speech_2ch_2.wav" "../OutStreams/speech_2ch_2_model1_out.wav" "1" "0" "1" "3_2_0" "0.0" "-0.1"
+cd ../
+cd bin/
+"projekat_model2.exe" "../TestStreams/speech_2ch_2.wav" "../OutStreams/speech_2ch_2_model2_out.wav" "1" "1" "1" "3_2_0" "0.0" "-0.1"
+																										:|zbog decimalnog zapisa
+cd ../
  
 : Generate new logs
 "PCMCompare.exe" "OutStreams//speech_2ch_2_model0_out.wav" "OutStreams//speech_2ch_2_model1_out.wav" 2> "OutCmp//speech_2ch_2_Model0_vs_Model1.txt"

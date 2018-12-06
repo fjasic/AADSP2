@@ -1,0 +1,677 @@
+1     	 0000					.public _INPUT_GAIN
+2     	 0000					.public _INPUT_MODE0_C
+3     	 0000					.public _INPUT_MODE0_LS
+4     	 0000					.public _INPUT_MODE1_C
+5     	 0000					.public _INPUT_MODE1_LS
+6     	 0000					.public _centralOutput
+7     	 0000					.public _data
+8     	 0000					.public _decibels
+9     	 0000					.public _enable
+10    	 0000					.public _i
+11    	 0000					.public _input_gain
+12    	 0000					.public _j
+13    	 0000					.public _k
+14    	 0000					.public _leftOutput
+15    	 0000					.public _lsOutput
+16    	 0000					.public _mode_switch
+17    	 0000					.public _outputMode
+18    	 0000					.public _pEnd
+19    	 0000					.public _rightOutput
+20    	 0000					.public _rsOutput
+21    	 0000					.public _sampleBuffer
+22    	 0000					.public _tmp
+23    	 0000					.public _tmp1
+24    	 0000					.public _val
+25    	 0000					.public _gst_audio_invert_transform
+26    							.xdata_ovly
+26     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+27    	 0000				_INPUT_GAIN
+28    	 0000					.dw  (0x4026e73d)
+	 0000	 4026E73D	 
+29    							.xdata_ovly
+29     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+30    	 0000				_INPUT_MODE0_C
+31    	 0000					.dw  (0x71cf5471)
+	 0000	 71CF5471	 
+32    							.xdata_ovly
+32     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+33    	 0000				_INPUT_MODE0_LS
+34    	 0000					.dw  (0x144960c5)
+	 0000	 144960C5	 
+35    							.xdata_ovly
+35     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+36    	 0000				_INPUT_MODE1_C
+37    	 0000					.dw  (0x5a6703e0)
+	 0000	 5A6703E0	 
+38    							.xdata_ovly
+38     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+39    	 0000				_INPUT_MODE1_LS
+40    	 0000					.dw  (0x4026e73d)
+	 0000	 4026E73D	 
+41    							.xdata_ovly
+41     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+42    	 0000				__extractedConst_0_1
+43    	 0000					.dw  (0x7fdf3b64)
+	 0000	 7FDF3B64	 
+44    							.xdata_ovly
+44     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+45    	 0000				__extractedConst_1_1
+46    	 0000					.dw  (0x20c49c)
+	 0000	 0020C49C	 
+47    							.xdata_ovly
+47     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+48    	 0000				_centralOutput
+49    	 0000					.bss (0x1)
+50    							.xdata_ovly
+50     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+51    	 0000				_data
+52    	 0000					.bss (0x3)
+53    							.xdata_ovly
+53     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+54    	 0000				_decibels
+55    	 0000					.bss (0x32)
+56    							.xdata_ovly
+56     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+57    	 0000				_enable
+58    	 0000					.dw  (0x1)
+	 0000	 00000001	 
+59    							.xdata_ovly
+59     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+60    	 0000				_i
+61    	 0000					.bss (0x1)
+62    							.xdata_ovly
+62     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+63    	 0000				_input_gain
+64    	 0000					.dw  (0x40000000)
+	 0000	 40000000	 
+65    							.xdata_ovly
+65     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+66    	 0000				_j
+67    	 0000					.bss (0x1)
+68    							.xdata_ovly
+68     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+69    	 0000				_k
+70    	 0000					.bss (0x1)
+71    							.xdata_ovly
+71     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+72    	 0000				_leftOutput
+73    	 0000					.bss (0x1)
+74    							.xdata_ovly
+74     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+75    	 0000				_lsOutput
+76    	 0000					.bss (0x1)
+77    							.xdata_ovly
+77     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+78    	 0000				_mode_switch
+79    	 0000					.dw  (0x1)
+	 0000	 00000001	 
+80    							.xdata_ovly
+80     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+81    	 0000				_outputMode
+82    	 0000					.dw  (0x3)
+	 0000	 00000003	 
+83    							.xdata_ovly
+83     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+84    	 0000				_pEnd
+85    	 0000					.bss (0x1)
+86    							.xdata_ovly
+86     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+87    	 0000				_rightOutput
+88    	 0000					.bss (0x1)
+89    							.xdata_ovly
+89     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+90    	 0000				_rsOutput
+91    	 0000					.bss (0x1)
+92    							.xdata_ovly
+92     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+93    	 0000				_sampleBuffer
+94    	 0000					.bss (0x80)
+95    							.xdata_ovly
+95     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+96    	 0000				_tmp
+97    	 0000					.bss (0x1)
+98    							.xdata_ovly
+98     >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+99    	 0000				_tmp1
+100   	 0000					.dw  (0x40000000)
+	 0000	 40000000	 
+101   							.xdata_ovly
+101    >> start of macro: .xdata_ovly
+1+    									seg_single , "X_OVLY", X
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_X_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "X_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_X_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .xdata_ovly
+102   	 0000				_val
+103   	 0000					.bss (0x3)
+104   							.code_ovly
+104    >> start of macro: .code_ovly
+1+    									seg_single , "CODE_OVLY", CODE
+1+     >> start of macro: seg_single
+1+    						  .if ( "" != "" ) & defined( ___SegStart_CODE_ )
+2+    						    segment
+3+    						  .else
+4+    						    segment "CODE_OVLY"
+5+    							.if "" != ""
+6+    						___SegStart_CODE_
+7+    							.endif
+8+    						  .endif
+9+    							#RememberSegmentType
+10+    >> end of macro: seg_single
+2+     >> end of macro: .code_ovly
+105   						
+106   						
+107   						
+108   	 0000				_gst_audio_invert_transform:			/* LN: 3 | CYCLE: 0 | RULES: () */ 
+109   	 0000	 BB540007		xmem[i7] = i7			# LN: 3 | 
+110   	 0001	 020F7FFF		i7 += 1			# LN: 3 | 
+111   	 0002	 87750004		i7 = i7 + (0x4)			# LN: 3 | 
+112   	 0003	 94750001		i4 = i7 - (0x1)			# LN: 3 | 
+113   	 0004	 B0540004		xmem[i4] = i0			# LN: 3 | 
+114   	 0005	 90750002		i0 = i7 - (0x2)			# LN: 3 | 
+115   	 0006	 B1540000		xmem[i0] = i1			# LN: 3 | 
+116   	 0007				cline_3_0:			/* LN: 6 | CYCLE: 0 | RULES: () */ 
+117   	 0007	 88040000		a0 = xmem[_data + 0]			# LN: 6 | 
+118   	 0008	 89040000		a1 = xmem[__extractedConst_0_1 + 0]			# LN: 6 | 
+119   	 0009	 000044C0		a0 = a1 - a0			# LN: 6 | 
+120   	 000A	 90750003		i0 = i7 - (0x3)			# LN: 6 | 
+121   	 000B	 98540000		xmem[i0] = a0h			# LN: 6 | 
+122   	 000C				cline_6_0:			/* LN: 7 | CYCLE: 0 | RULES: () */ 
+123   	 000C	 90750003		i0 = i7 - (0x3)			# LN: 7 | 
+124   	 000D	 88140000		a0 = xmem[i0]			# LN: 7 | 
+125   	 000E	 89040000		a1 = xmem[__extractedConst_1_1 + 0]			# LN: 7 | 
+126   	 000F	 00004408		a0 = a0 + a1			# LN: 7 | 
+127   	 0010	 90750003		i0 = i7 - (0x3)			# LN: 7 | 
+128   	 0011	 98540000		xmem[i0] = a0h			# LN: 7 | 
+129   	 0012				cline_7_0:			/* LN: 10 | CYCLE: 0 | RULES: () */ 
+130   	 0012	 90750004		i0 = i7 - (0x4)			# LN: 10 | 
+131   	 0013	 00004DC0		a0 = 0			# LN: 10 | 
+132   	 0014	 98540000		xmem[i0] = a0h			# LN: 10 | 
+133   	 0015	 81000043		do (0x10), label_end_92			# LN: 10 | 
+134   	 0016				cline_10_0:			/* LN: 12 | CYCLE: 0 | RULES: () */ 
+135   	 0016				label_begin_92:			/* LN: 10 | CYCLE: 0 | RULES: () */ 
+136   	 0016	 90750001		i0 = i7 - (0x1)			# LN: 12 | 
+137   	 0017	 B0140000		i0 = xmem[i0]			# LN: 12 | 
+138   	 0018	 88040000		a0 = xmem[_tmp1 + 0]			# LN: 12 | 
+139   	 0019	 89940000		a1 = ymem[i0]			# LN: 12 | 
+140   	 001A	 00004E41		a1 = a1 >> 1			# LN: 12 | 
+141   	 001B	 00004408		a0 = a0 + a1			# LN: 12 | 
+142   	 001C	 98440000		xmem[_tmp + 0] = a0h			# LN: 12 | 
+143   	 001D				cline_12_0:			/* LN: 13 | CYCLE: 0 | RULES: () */ 
+144   	 001D	 90750001		i0 = i7 - (0x1)			# LN: 13 | 
+145   	 001E	 B0140000		i0 = xmem[i0]			# LN: 13 | 
+146   	 001F	 91750003		i1 = i7 - (0x3)			# LN: 13 | 
+147   	 0020	 88940000		a0 = ymem[i0]			# LN: 13 | 
+148   	 0021	 10414E40		x0 = xmem[i1]; a0 = a0 >> 1			# LN: 13, 13 | 
+149   	 0022	 01587FFF		x1 = a0h			# LN: 13 | 
+150   	 0023	 00002020		a0 = x1 * x0			# LN: 13 | 
+151   	 0024	 80040000		x0 = xmem[_data + 0]			# LN: 13 | 
+152   	 0025	 81040000		x1 = xmem[_tmp + 0]			# LN: 13 | 
+153   	 0026	 00002038		a0 -= x1 * x0			# LN: 13 | 
+154   	 0027	 A0440000		xmem[_val + 0] = a0g			# LN: 13 | 
+155   	 0028	 98440001		xmem[_val + 1] = a0h			# LN: 13 | 
+156   	 0029	 90440002		xmem[_val + 2] = a0l			# LN: 13 | 
+157   	 002A				cline_13_0:			/* LN: 14 | CYCLE: 0 | RULES: () */ 
+158   	 002A	 90750001		i0 = i7 - (0x1)			# LN: 14 | 
+159   	 002B	 B0140000		i0 = xmem[i0]			# LN: 14 | 
+160   	 002C	 91750001		i1 = i7 - (0x1)			# LN: 14 | 
+161   	 002D	 02087FFF		i0 += 1			# LN: 14 | 
+162   	 002E	 B0540001		xmem[i1] = i0			# LN: 14 | 
+163   	 002F				cline_14_0:			/* LN: 15 | CYCLE: 0 | RULES: () */ 
+164   	 002F	 A0040000		a0g = xmem[_val + 0]			# LN: 15 | 
+165   	 0030	 98040001		a0h = xmem[_val + 1]			# LN: 15 | 
+166   	 0031	 90040002		a0l = xmem[_val + 2]			# LN: 15 | 
+167   	 0032	 48407FFF		x0 = a0			# LN: 15 | 
+168   	 0033	 81040001		x1 = xmem[_data + 1]			# LN: 15 | 
+169   	 0034	 00002080		a0 = x0 * x1			# LN: 15 | 
+170   	 0035	 90750002		i0 = i7 - (0x2)			# LN: 15 | 
+171   	 0036	 B0140000		i0 = xmem[i0]			# LN: 15 | 
+172   	 0037	 00004E00		a0 = a0 << 1			# LN: 15 | 
+173   	 0038	 88D40000		ymem[i0] = a0			# LN: 15 | 
+174   	 0039				cline_15_0:			/* LN: 16 | CYCLE: 0 | RULES: () */ 
+175   	 0039	 90750002		i0 = i7 - (0x2)			# LN: 16 | 
+176   	 003A	 B0140000		i0 = xmem[i0]			# LN: 16 | 
+177   	 003B	 91750002		i1 = i7 - (0x2)			# LN: 16 | 
+178   	 003C	 02087FFF		i0 += 1			# LN: 16 | 
+179   	 003D	 B0540001		xmem[i1] = i0			# LN: 16 | 
+180   	 003E				cline_16_0:			/* LN: 10 | CYCLE: 0 | RULES: () */ 
+181   	 003E				init_latch_label_0:			/* LN: 17 | CYCLE: 0 | RULES: () */ 
+182   	 003E	 90750004		i0 = i7 - (0x4)			# LN: 10 | 
+183   	 003F	 88140000		a0 = xmem[i0]			# LN: 10 | 
+184   	 0040	 894A0001		uhalfword(a1) = (0x1)			# LN: 10 | 
+185   	 0041	 00004408		a0 = a0 + a1			# LN: 10 | 
+186   	 0042	 90750004		i0 = i7 - (0x4)			# LN: 10 | 
+187   	 0043				label_end_92:			# LN: 10 | CYCLE: 5 | RULES: ()
+188   	 0043	 98540000		xmem[i0] = a0h			# LN: 10 | 
+189   	 0044				cline_10_1:			/* LN: 18 | CYCLE: 0 | RULES: () */ 
+190   	 0044				for_end_0:			/* LN: 10 | CYCLE: 0 | RULES: () */ 
+191   	 0044	 80080045		jmp (__epilogue_104)			# LN: 18 | 
+192   	 0045				__epilogue_104:			/* LN: 18 | CYCLE: 0 | RULES: () */ 
+193   	 0045	 97750004		i7 = i7 - (0x4)			# LN: 18 | 
+194   	 0046	 02177FFF		i7 -= 1			# LN: 18 | 
+195   	 0047	 81880000		ret			# LN: 18 | 
+196   						(null)
+				 SYMBOL TABLE 
+
+    Name                                                                                    Type                  Value 
+
+_COMMON_INC_PATH_                                                               					 Define                 "C:/CirrusDSP/crystal32/common/inc/"
+_DSP_                                                                           					 Define                 "a"
+_INPUT_GAIN                                                                     			  Public Relocatable       inverter_GEN_0000:0000H
+_INPUT_MODE0_C                                                                  			  Public Relocatable       inverter_GEN_0001:0000H
+_INPUT_MODE0_LS                                                                 			  Public Relocatable       inverter_GEN_0002:0000H
+_INPUT_MODE1_C                                                                  			  Public Relocatable       inverter_GEN_0003:0000H
+_INPUT_MODE1_LS                                                                 			  Public Relocatable       inverter_GEN_0004:0000H
+_LOCAL_INC_PATH_                                                                					 Define                 "inc/"
+_LOCAL_SRC_PATH_                                                                					 Define                 "src/"
+_MUI_VERSION_                                                                   					 Define                 "020000"
+_OVLY_                                                                          					 Define                 "standalone"
+_OVLY_REVISION_                                                                 					 Define                 "020000"
+_ROUTER_INC_PATH_                                                               					 Define                 "rom_inc/"
+_SLOT_                                                                          					 Define                 "0"
+_TARGET_FAMILY_                                                                 					 Define                 "crystal32"
+_TOOLS_VERSION_                                                                 					 Define                 "0x0701"
+_VERSION_                                                                       					 Define                 "00"
+__CASM_VER__                                                                    			  Unused Variable		        0 (701H)
+__epilogue_104                                                                  			         Relocatable         inverter_GEN_0026:0045H
+__extractedConst_0_1                                                            			         Relocatable         inverter_GEN_0005:0000H
+__extractedConst_1_1                                                            			         Relocatable         inverter_GEN_0006:0000H
+_centralOutput                                                                  			  Public Relocatable       inverter_GEN_0007:0000H
+_data                                                                           			  Public Relocatable       inverter_GEN_0008:0000H
+_decibels                                                                       			  Public Relocatable       inverter_GEN_0009:0000H
+_enable                                                                         			  Public Relocatable       inverter_GEN_0010:0000H
+_gst_audio_invert_transform                                                     			  Public Relocatable       inverter_GEN_0026:0000H
+_i                                                                              			  Public Relocatable       inverter_GEN_0011:0000H
+_input_gain                                                                     			  Public Relocatable       inverter_GEN_0012:0000H
+_j                                                                              			  Public Relocatable       inverter_GEN_0013:0000H
+_k                                                                              			  Public Relocatable       inverter_GEN_0014:0000H
+_leftOutput                                                                     			  Public Relocatable       inverter_GEN_0015:0000H
+_lsOutput                                                                       			  Public Relocatable       inverter_GEN_0016:0000H
+_mode_switch                                                                    			  Public Relocatable       inverter_GEN_0017:0000H
+_outputMode                                                                     			  Public Relocatable       inverter_GEN_0018:0000H
+_pEnd                                                                           			  Public Relocatable       inverter_GEN_0019:0000H
+_rightOutput                                                                    			  Public Relocatable       inverter_GEN_0020:0000H
+_rsOutput                                                                       			  Public Relocatable       inverter_GEN_0021:0000H
+_sampleBuffer                                                                   			  Public Relocatable       inverter_GEN_0022:0000H
+_tmp                                                                            			  Public Relocatable       inverter_GEN_0023:0000H
+_tmp1                                                                           			  Public Relocatable       inverter_GEN_0024:0000H
+_val                                                                            			  Public Relocatable       inverter_GEN_0025:0000H
+cline_10_0                                                                      			  Unused Relocatable        inverter_GEN_0026:0016H
+cline_10_1                                                                      			  Unused Relocatable        inverter_GEN_0026:0044H
+cline_12_0                                                                      			  Unused Relocatable        inverter_GEN_0026:001DH
+cline_13_0                                                                      			  Unused Relocatable        inverter_GEN_0026:002AH
+cline_14_0                                                                      			  Unused Relocatable        inverter_GEN_0026:002FH
+cline_15_0                                                                      			  Unused Relocatable        inverter_GEN_0026:0039H
+cline_16_0                                                                      			  Unused Relocatable        inverter_GEN_0026:003EH
+cline_3_0                                                                       			  Unused Relocatable        inverter_GEN_0026:0007H
+cline_6_0                                                                       			  Unused Relocatable        inverter_GEN_0026:000CH
+cline_7_0                                                                       			  Unused Relocatable        inverter_GEN_0026:0012H
+for_end_0                                                                       			  Unused Relocatable        inverter_GEN_0026:0044H
+init_latch_label_0                                                              			  Unused Relocatable        inverter_GEN_0026:003EH
+label_begin_92                                                                  			  Unused Relocatable        inverter_GEN_0026:0016H
+label_end_92                                                                    			         Relocatable         inverter_GEN_0026:0043H
+
+	       SEGMENTS:
+
+Size			  Name										 Class
+0000H	 __INIT                                  			 CODE                                    
+0001H	 inverter_GEN_0000                       			 X_OVLY                                  
+0001H	 inverter_GEN_0001                       			 X_OVLY                                  
+0001H	 inverter_GEN_0002                       			 X_OVLY                                  
+0001H	 inverter_GEN_0003                       			 X_OVLY                                  
+0001H	 inverter_GEN_0004                       			 X_OVLY                                  
+0001H	 inverter_GEN_0005                       			 X_OVLY                                  
+0001H	 inverter_GEN_0006                       			 X_OVLY                                  
+0001H	 inverter_GEN_0007                       			 X_OVLY                                  
+0003H	 inverter_GEN_0008                       			 X_OVLY                                  
+0032H	 inverter_GEN_0009                       			 X_OVLY                                  
+0001H	 inverter_GEN_0010                       			 X_OVLY                                  
+0001H	 inverter_GEN_0011                       			 X_OVLY                                  
+0001H	 inverter_GEN_0012                       			 X_OVLY                                  
+0001H	 inverter_GEN_0013                       			 X_OVLY                                  
+0001H	 inverter_GEN_0014                       			 X_OVLY                                  
+0001H	 inverter_GEN_0015                       			 X_OVLY                                  
+0001H	 inverter_GEN_0016                       			 X_OVLY                                  
+0001H	 inverter_GEN_0017                       			 X_OVLY                                  
+0001H	 inverter_GEN_0018                       			 X_OVLY                                  
+0001H	 inverter_GEN_0019                       			 X_OVLY                                  
+0001H	 inverter_GEN_0020                       			 X_OVLY                                  
+0001H	 inverter_GEN_0021                       			 X_OVLY                                  
+0080H	 inverter_GEN_0022                       			 X_OVLY                                  
+0001H	 inverter_GEN_0023                       			 X_OVLY                                  
+0001H	 inverter_GEN_0024                       			 X_OVLY                                  
+0003H	 inverter_GEN_0025                       			 X_OVLY                                  
+0048H	 inverter_GEN_0026                       			 CODE_OVLY                               

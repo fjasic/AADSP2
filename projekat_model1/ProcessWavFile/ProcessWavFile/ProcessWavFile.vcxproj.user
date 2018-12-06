@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>"C:\Users\fili\Desktop\za postaviti\AADSP2\projekat_model1\ProcessWavFile\speech_2ch_2.wav" "C:\Users\fili\Desktop\za postaviti\AADSP2\projekat_model1\ProcessWavFile\output-model1-300.wav" "1" "0" "1" "3_0_0"</LocalDebuggerCommandArguments>
-    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-  </PropertyGroup>
-</Project>
